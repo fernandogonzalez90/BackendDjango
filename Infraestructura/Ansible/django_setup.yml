@@ -1,0 +1,99 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Actualiza los paquetes al inicio
+      apt:
+        update_cache: yes
+        upgrade: dist
+      when: ansible_os_family == 'Debian'
+
+    - name: Instala las dependencias necesarias
+      apt:
+        name:
+          - python3-pip
+          - nginx
+        state: present
+      when: ansible_os_family == 'Debian'
+
+    - name: Instala virtualenv
+      pip:
+        name: virtualenv
+
+    - name: Clona el repositorio
+      git:
+        repo: "https://github.com/fernandogonzalez90/BackendDjango.git"
+        dest: /home/admin/BackendDjango
+
+    - name: Crea el entorno virtual dentro del proyecto
+      command: python3 -m venv /home/admin/BackendDjango/venv
+      args:
+        creates: /home/admin/BackendDjango/venv/bin/activate
+
+    - name: Instala los requirements
+      pip:
+        requirements: /home/admin/BackendDjango/requirements.txt
+        virtualenv: /home/admin/BackendDjango/venv
+
+    - name: Configura Gunicorn
+      copy:
+        dest: /etc/systemd/system/gunicorn.service
+        content: |
+          [Unit]
+          Description=gunicorn daemon
+          After=network.target
+
+          [Service]
+          User=admin
+          Group=nginx
+          WorkingDirectory=/home/admin/BackendDjango
+          ExecStart=/home/admin/BackendDjango/venv/bin/gunicorn --workers 3 --bind unix:/home/admin/BackendDjango/gunicorn.sock backend.wsgi:application
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Inicia y habilita gunicorn
+      systemd:
+        name: gunicorn
+        state: started
+        enabled: yes
+
+    - name: Configura Nginx
+      copy:
+        dest: /etc/nginx/sites-available/BackendDjango
+        content: |
+          server {
+              listen 80;
+              server_name {{ server_ip }}
+
+              location / {
+                  proxy_pass http://unix:/home/admin/BackendDjango/gunicorn.sock;
+                  proxy_set_header Host $host;
+                  proxy_set_header X-Real-IP $remote_addr;
+                  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                  proxy_set_header X-Forwarded-Proto $scheme;
+              }
+          }
+      notify: restart nginx
+
+    - name: Enable Nginx site
+      file:
+        src: /etc/nginx/sites-available/BackendDjango
+        dest: /etc/nginx/sites-enabled/BackendDjango
+        state: link
+
+    - name: Remove default Nginx site
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+
+    - name: Ensure Nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted

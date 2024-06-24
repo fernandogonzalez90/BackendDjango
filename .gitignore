@@ -1,0 +1,18 @@
+# Entorno virtual
+env
+
+# Archivos Multimedia
+media/*
+
+# Base de datos
+db.*
+
+# Clave ssh
+**/*/*.pub
+
+# Archivos de Terraform
+**/*/.terraform
+**/*.tfstate
+**/*.tfstate.*
+**/*.tfvars
+**/*.terraform.lock.hcl
