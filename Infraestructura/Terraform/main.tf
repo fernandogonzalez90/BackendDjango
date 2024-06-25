@@ -18,7 +18,7 @@ resource "aws_instance" "django_server" {
       sleep 60  # Espera 60 segundos antes de ejecutar los comandos
       echo "[django]
       ${self.public_ip} ansible_user=admin ansible_ssh_private_key_file=~/.ssh/id_rsa" > ../Ansible/hosts.ini
-      ansible-playbook -i ../Ansible/hosts.ini ../Ansible/django_setup.yaml --ssh-common-args='-o StrictHostKeyChecking=no' --extra-vars "server_ip=${self.public_ip}"
+      ansible-playbook -i ../Ansible/hosts.ini ../Ansible/django_setup.yml --ssh-common-args='-o StrictHostKeyChecking=no' --extra-vars "server_ip=${self.public_ip}"
     EOT
   }
 }
