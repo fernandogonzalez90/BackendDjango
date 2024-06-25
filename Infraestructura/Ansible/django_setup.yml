@@ -11,13 +11,16 @@
       apt:
         name:
           - python3-pip
+          - python3-venv
+          - git
           - nginx
         state: present
       when: ansible_os_family == 'Debian'
 
     - name: Instala virtualenv
-      pip:
+      apt:
         name: virtualenv
+        state: present
 
     - name: Clona el repositorio
       git:
@@ -29,7 +32,7 @@
       args:
         creates: /home/admin/BackendDjango/venv/bin/activate
 
-    - name: Instala los requirements
+    - name: Instala los requirements usando el entorno virtual
       pip:
         requirements: /home/admin/BackendDjango/requirements.txt
         virtualenv: /home/admin/BackendDjango/venv
