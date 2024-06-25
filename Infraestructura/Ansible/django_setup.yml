@@ -14,13 +14,9 @@
           - python3-venv
           - git
           - nginx
+          - virtualenv
         state: present
       when: ansible_os_family == 'Debian'
-
-    - name: Instala virtualenv
-      apt:
-        name: virtualenv
-        state: present
 
     - name: Clona el repositorio
       git:
@@ -28,14 +24,14 @@
         dest: /home/admin/BackendDjango
 
     - name: Crea el entorno virtual dentro del proyecto
-      command: python3 -m venv /home/admin/BackendDjango/venv
+      command: python3 -m venv /home/admin/BackendDjango/env
       args:
-        creates: /home/admin/BackendDjango/venv/bin/activate
+        creates: /home/admin/BackendDjango/env/bin/activate
 
     - name: Instala los requirements usando el entorno virtual
       pip:
         requirements: /home/admin/BackendDjango/requirements.txt
-        virtualenv: /home/admin/BackendDjango/venv
+        virtualenv: /home/admin/BackendDjango/env
 
     - name: Configura la ip en allowed_hosts.py
       copy:
@@ -44,7 +40,6 @@
 
     - name: Ejecuta migrate
       shell: python3 manage.py migrate
-
 
     - name: Configura Gunicorn
       copy:
@@ -74,7 +69,7 @@
         dest: /etc/nginx/sites-available/BackendDjango
         content: |
           server {
-              listen 80;
+              listen 8000;
               server_name {{server_ip}};
 
               location / {
@@ -84,26 +79,22 @@
                   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                   proxy_redirect off;
               }
-
-              location /static/ {
-                  root /home/usuario/proyecto/static/;
-              }
           }
 
       notify: restart nginx
 
-    - name: Enable Nginx site
+    - name: Habilia el sitio de Nginx
       file:
         src: /etc/nginx/sites-available/BackendDjango
         dest: /etc/nginx/sites-enabled/BackendDjango
         state: link
 
-    - name: Remove default Nginx site
+    - name: Remueve el sitio por default de Nginx
       file:
         path: /etc/nginx/sites-enabled/default
         state: absent
 
-    - name: Ensure Nginx is running
+    - name: Ejecuta Nginx
       service:
         name: nginx
         state: started
