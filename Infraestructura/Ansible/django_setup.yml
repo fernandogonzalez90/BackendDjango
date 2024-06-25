@@ -37,6 +37,15 @@
         requirements: /home/admin/BackendDjango/requirements.txt
         virtualenv: /home/admin/BackendDjango/venv
 
+    - name: Configura la ip en allowed_hosts.py
+      copy:
+       dest: /home/admin/BackendDjango/allowed_hosts.py
+       content: "ALLOWED_HOSTS = [{{server_ip}}]"
+
+    - name: Ejecuta migrate
+      shell: python3 manage.py migrate
+
+
     - name: Configura Gunicorn
       copy:
         dest: /etc/systemd/system/gunicorn.service
@@ -49,7 +58,7 @@
           User=admin
           Group=nginx
           WorkingDirectory=/home/admin/BackendDjango
-          ExecStart=/home/admin/BackendDjango/venv/bin/gunicorn --workers 3 --bind unix:/home/admin/BackendDjango/gunicorn.sock backend.wsgi:application
+          ExecStart=/home/admin/BackendDjango/venv/bin/python3 -m gunicorn --config allowed_hosts.py
 
           [Install]
           WantedBy=multi-user.target
@@ -66,16 +75,21 @@
         content: |
           server {
               listen 80;
-              server_name {{ server_ip }}
+              server_name {{server_ip}};
 
               location / {
-                  proxy_pass http://unix:/home/admin/BackendDjango/gunicorn.sock;
+                  proxy_pass http://localhost:8000;
                   proxy_set_header Host $host;
                   proxy_set_header X-Real-IP $remote_addr;
                   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                  proxy_set_header X-Forwarded-Proto $scheme;
+                  proxy_redirect off;
+              }
+
+              location /static/ {
+                  root /home/usuario/proyecto/static/;
               }
           }
+
       notify: restart nginx
 
     - name: Enable Nginx site
