@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-b)vt_*ed6vuy4bzpue0_#u@8su*_x6&u20qsrxbg#y!rrp9psc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-#ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -54,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.static.StaticMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -125,9 +127,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = []
-
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
