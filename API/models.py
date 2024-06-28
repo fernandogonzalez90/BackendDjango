@@ -5,7 +5,7 @@ class General(models.Model):
     titulo = models.CharField(max_length=50)
     subtitulo = models.CharField(max_length=200)
     descripcion = models.TextField()
-    imagen = models.ImageField(upload_to='imagenes/')
+    imagen = models.ImageField(upload_to='staticfiles/')
     github = models.URLField(max_length=500)
     linkedin = models.URLField(max_length=500)
     email = models.EmailField(max_length=50)
