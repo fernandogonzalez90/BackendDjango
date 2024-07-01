@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
 from .models import *
 from .serializers import *
@@ -7,6 +8,7 @@ from .serializers import *
 class GeneralCreate(generics.ListCreateAPIView):
     queryset = General.objects.all()
     serializer_class = GeneralSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class GeneralDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -18,6 +20,7 @@ class GeneralDetail(generics.RetrieveUpdateDestroyAPIView):
 class CertificacionesCreate(generics.ListCreateAPIView):
     queryset = Certificaciones.objects.all()
     serializer_class = CertificacionesSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class CertificacionesDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -29,6 +32,7 @@ class CertificacionesDetail(generics.RetrieveUpdateDestroyAPIView):
 class ProyectosCreate(generics.ListCreateAPIView):
     queryset = Proyectos.objects.all()
     serializer_class = ProyectosSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class ProyectosDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -40,6 +44,7 @@ class ProyectosDetail(generics.RetrieveUpdateDestroyAPIView):
 class SkillsCreate(generics.ListCreateAPIView):
     queryset = Skills.objects.all()
     serializer_class = SkillsSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class SkillsDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -51,11 +56,12 @@ class SkillsDetail(generics.RetrieveUpdateDestroyAPIView):
 class SoftSkillsCreate(generics.ListCreateAPIView):
     queryset = SoftSkills.objects.all()
     serializer_class = SoftSkillsSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class SoftSkillsDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = SoftSkills.objects.all()
-    serializer_class = SoftSkillsSerializer
+
 
 
 # Contacto
