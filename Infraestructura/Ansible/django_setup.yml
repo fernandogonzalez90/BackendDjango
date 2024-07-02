@@ -7,6 +7,7 @@
         upgrade: dist
       when: ansible_os_family == 'Debian'
 
+
     - name: Instala las dependencias necesarias
       apt:
         name:
@@ -18,28 +19,78 @@
         state: present
       when: ansible_os_family == 'Debian'
 
+
     - name: Clona el repositorio
       git:
         repo: "https://github.com/fernandogonzalez90/BackendDjango.git"
         dest: /home/admin/BackendDjango
+
 
     - name: Crea el entorno virtual dentro del proyecto
       command: python3 -m venv /home/admin/BackendDjango/env
       args:
         creates: /home/admin/BackendDjango/env/bin/activate
 
+
     - name: Instala los requirements usando el entorno virtual
       pip:
         requirements: /home/admin/BackendDjango/requirements.txt
         virtualenv: /home/admin/BackendDjango/env
 
+
     - name: Configura la ip en allowed_hosts.py
       copy:
-       dest: /home/admin/BackendDjango/allowed_hosts.py
-       content: "ALLOWED_HOSTS = [{{server_ip}}]"
+       dest: /home/admin/BackendDjango/Backend/allowed_hosts.py
+       content: "ALLOWED_HOSTS = ['{{server_ip}}']"
+
+    - name: Establecer permisos del directorio del proyecto
+      ansible.builtin.file:
+        path: /home/admin/BackendDjango
+        owner: admin
+        group: admin
+        mode: '0755'
+        recurse: yes
+      become: yes
+
+    - name: Crea el directorio static para desarrollo
+      file:
+        path: /home/admin/BackendDjango/staticfiles
+        state: directory
+        mode: '0755'
+
+    - name: Establecer permisos del directorio staticfiles
+      ansible.builtin.file:
+        path: /home/admin/BackendDjango/staticfiles
+        owner: admin
+        group: admin
+        mode: '0755'
+        recurse: yes
+      become: yes
+
+    - name: Ejecuta collectstatic
+      shell: |
+        . /home/admin/BackendDjango/env/bin/activate
+        python /home/admin/BackendDjango/manage.py collectstatic --noinput
+      args:
+        chdir: /home/admin/BackendDjango
+
+    - name: Crear db.sqlite3 si no existe
+      ansible.builtin.file:
+        path: /home/admin/BackendDjango/db.sqlite3
+        state: touch
+        owner: admin
+        group: admin
+        mode: '0664'
+      become: yes
+
 
     - name: Ejecuta migrate
-      shell: python3 manage.py migrate
+      shell: |
+        . /home/admin/BackendDjango/env/bin/activate
+        python /home/admin/BackendDjango/manage.py migrate
+      args:
+        chdir: /home/admin/BackendDjango
+
 
     - name: Configura Gunicorn
       copy:
@@ -51,9 +102,9 @@
 
           [Service]
           User=admin
-          Group=nginx
+          Group=admin
           WorkingDirectory=/home/admin/BackendDjango
-          ExecStart=/home/admin/BackendDjango/venv/bin/python3 -m gunicorn --config allowed_hosts.py
+          ExecStart=/home/admin/BackendDjango/env/bin/python3 -m gunicorn --workers 3 --bind 0.0.0.0 Backend.wsgi:application
 
           [Install]
           WantedBy=multi-user.target
@@ -64,44 +115,48 @@
         state: started
         enabled: yes
 
+    - name: Reinicia Gunicorn
+      systemd:
+        name: gunicorn
+        state: restarted
+      become: yes
+
+
     - name: Configura Nginx
       copy:
         dest: /etc/nginx/sites-available/BackendDjango
         content: |
           server {
-              listen 8000;
-              server_name {{server_ip}};
+              listen 80;
+              server_name backendjango.ddns.net;
 
               location / {
-                  proxy_pass http://localhost:8000;
+                  proxy_pass backendjango.ddns.net;
                   proxy_set_header Host $host;
                   proxy_set_header X-Real-IP $remote_addr;
                   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                   proxy_redirect off;
               }
+              location /static/ {
+              alias /home/admin/BackendDjango/staticfiles/;
+              }
           }
 
-      notify: restart nginx
-
-    - name: Habilia el sitio de Nginx
+    - name: Habilita el sitio de Nginx
       file:
         src: /etc/nginx/sites-available/BackendDjango
         dest: /etc/nginx/sites-enabled/BackendDjango
         state: link
+
 
     - name: Remueve el sitio por default de Nginx
       file:
         path: /etc/nginx/sites-enabled/default
         state: absent
 
-    - name: Ejecuta Nginx
-      service:
+
+    - name: Habilitar configuración de Nginx
+      systemd:
         name: nginx
         state: started
         enabled: yes
-
-  handlers:
-    - name: restart nginx
-      service:
-        name: nginx
-        state: restarted
