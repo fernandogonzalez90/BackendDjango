@@ -34,8 +34,8 @@ resource "aws_security_group" "django_sg" {
   }
 
   ingress {
-    from_port   = 8000
-    to_port     = 8000
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -61,5 +61,5 @@ resource "aws_key_pair" "django-key" {
 }
 
 output "django_url" {
-  value = "http://${aws_instance.django_server.public_ip}:8080"
+  value = "http://${aws_instance.django_server.public_ip}"
 }
