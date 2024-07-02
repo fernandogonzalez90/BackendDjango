@@ -20,3 +20,4 @@ Backend/__pycache__/allowed_hosts.cpython-311.pyc
 
 .gitignore
 .vscode/
+Infraestructura/Ansible/hosts.ini
