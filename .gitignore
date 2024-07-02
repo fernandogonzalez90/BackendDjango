@@ -16,3 +16,7 @@ db.*
 **/*.tfstate.*
 **/*.tfvars
 **/*.terraform.lock.hcl
+Backend/__pycache__/allowed_hosts.cpython-311.pyc
+
+.gitignore
+.vscode/
