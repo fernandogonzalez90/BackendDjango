@@ -7,8 +7,17 @@ class GeneralSerializer(serializers.ModelSerializer):
         model = General
         fields = '__all__'
 
+    def create(self, validated_data):
+        return General.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+        return instance
 
 class CertificacionesSerializer(serializers.ModelSerializer):
+#    descripcion = serializers.JSONField()
     class Meta:
         model = Certificaciones
         fields = '__all__'

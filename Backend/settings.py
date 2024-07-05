@@ -27,13 +27,13 @@ SECRET_KEY = 'django-insecure-b)vt_*ed6vuy4bzpue0_#u@8su*_x6&u20qsrxbg#y!rrp9psc
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = ['backendjango.ddns.net']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -63,9 +63,6 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
 }
 
 SIMPLE_JWT = {
@@ -73,10 +70,19 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://backendjango.ddns.net",
+    "https://staginfrontend.netlify.app",
+    # Agregue aquí cualquier otro dominio que necesite
+]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 CORS_ORIGIN_WHITELIST = [
-    'https://backendjango.ddns.net',
+    'https://staginfrontend.netlify.app',
 ]
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'Backend.urls'
 
@@ -147,5 +153,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
