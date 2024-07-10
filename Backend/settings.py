@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-b)vt_*ed6vuy4bzpue0_#u@8su*_x6&u20qsrxbg#y!rrp9psc
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['backendjango.ddns.net']
+# ALLOWED_HOSTS = ['backendjango.ddns.net']
 
 
 # Application definition
@@ -73,7 +73,6 @@ SIMPLE_JWT = {
 CSRF_TRUSTED_ORIGINS = [
     "https://backendjango.ddns.net",
     "https://staginfrontend.netlify.app",
-    # Agregue aquí cualquier otro dominio que necesite
 ]
 
 CSRF_COOKIE_SECURE = True
