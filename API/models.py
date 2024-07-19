@@ -34,7 +34,7 @@ class Proyectos(models.Model):
     categoria = models.CharField(max_length=50)
     descripcion = models.TextField()
     repositorio = models.URLField(max_length=500)
-    view_live = models.URLField(max_length=500)
+    view_live = models.URLField(max_length=500, blank=True, null=True)
     iconos = models.CharField(max_length=200)
 
     def __str__(self) -> str:
