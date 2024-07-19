@@ -1,1 +1,1 @@
-ALLOWED_HOSTS = ['15.229.10.68', 'localhost', 'backendjango.ddns.net']
+ALLOWED_HOSTS = ['15.229.10.68', 'backendjango.ddns.net']

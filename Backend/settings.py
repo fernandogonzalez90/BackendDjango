@@ -71,7 +71,6 @@ SIMPLE_JWT = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    "localhost",
     "https://backendjango.ddns.net",
     "https://devgonzalezf.netlify.app",
 ]
@@ -81,7 +80,6 @@ SESSION_COOKIE_SECURE = True
 
 CORS_ORIGIN_WHITELIST = [
     'https://devgonzalezf.netlify.app',
-    'localhost',
 ]
 CORS_ALLOW_CREDENTIALS = True
 
