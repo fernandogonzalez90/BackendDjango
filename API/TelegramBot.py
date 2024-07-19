@@ -1,6 +1,6 @@
 import asyncio
 from telegram import Bot
-from obtiene_id_telegram import obtener_id
+from .obtiene_id_telegram import obtener_id
 
 message = "probando bot"
 
