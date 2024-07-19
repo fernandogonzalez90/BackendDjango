@@ -13,16 +13,13 @@
         dest: /home/admin/BackendDjango
         update: yes
 
-
-    - name: Activa el entorno virtual
-      command: source /home/admin/BackendDjango/env/bin/activate
+    - name: Instala los requirements usando el entorno virtual
+      shell: |
+        source /home/admin/BackendDjango/env/bin/activate
+        pip install -r /home/admin/BackendDjango/requirements.txt
       args:
-        executable: /bin/bash
+        chdir: /home/admin/BackendDjango
 
-    - name: Instala nuevos requerimientos en el entorno virtual
-      pip:
-        requirements: /home/admin/BackendDjango/requirements.txt
-        virtualenv: /home/admin/BackendDjango/env
 
     - name: Respaldar la base de datos
       shell: |
@@ -31,19 +28,20 @@
         creates: /home/admin/BackendDjango/db_backup_$(date +%Y%m%d%H%M%S).sqlite3
       become: yes
 
+    - name: Ejecuta collectstatic
+      shell: |
+        source /home/admin/BackendDjango/env/bin/activate
+        python /home/admin/BackendDjango/manage.py collectstatic --noinput
+      args:
+        chdir: /home/admin/BackendDjango
+
     - name: Ejecuta migrate
       shell: |
-        . /home/admin/BackendDjango/env/bin/activate
+        source /home/admin/BackendDjango/env/bin/activate
         python /home/admin/BackendDjango/manage.py migrate
       args:
         chdir: /home/admin/BackendDjango
 
-    - name: Ejecuta collecstatic
-      shell: |
-        . /home/admin/BackendDjango/env/bin/activate
-        python /home/admin/BackendDjango/manage.py collecstatic --noinput
-      args:
-        chdir: /home/admin/BackendDjango
 
     - name: Reinicia Gunicorn
       systemd:
