@@ -7,20 +7,50 @@
         upgrade: yes
       when: ansible_os_family == 'Debian'
 
-    - name: Descartar cambios locales
-      command: git reset --hard
-      args:
-        chdir: /home/admin/BackendDjango
+    - name: Asegurar que el directorio .ssh existe
+      file:
+        path: /home/admin/.ssh
+        state: directory
+        mode: '0700'
+        owner: admin
+        group: admin
 
-    - name: Limpiar archivos no rastreados
-      command: git clean -fd
-      args:
-        chdir: /home/admin/BackendDjango
+    - name: Configurar GitHub en SSH config
+      blockinfile:
+        path: /home/admin/.ssh/config
+        block: |
+          Host github.com
+            IdentityFile /home/admin/.ssh/id_rsa
+            User git
+        create: yes
+        mode: '0600'
+        owner: admin
+        group: admin
+
+    - name: Iniciar el agente SSH y configurar variables de entorno
+      shell: |
+        eval $(ssh-agent -s)
+        echo $SSH_AUTH_SOCK
+      register: ssh_agent_output
+      changed_when: false
+
+    - name: Configurar variable de entorno SSH_AUTH_SOCK
+      set_fact:
+        ssh_auth_sock: "{{ ssh_agent_output.stdout_lines[-1] }}"
+
+    - name: Agregar la clave SSH al agente
+      shell: ssh-add /home/admin/.ssh/id_rsa
+      environment:
+        SSH_AUTH_SOCK: "{{ ssh_auth_sock }}"
 
     - name: Actualiza el código del repositorio
-      command: git pull origin main
-      args:
-        chdir: /home/admin/BackendDjango
+      git:
+        repo: 'git@github.com:fernandogonzalez90/BackendDjango.git'
+        dest: /home/admin/BackendDjango
+        version: main
+        update: yes
+      become: yes
+      become_user: admin
 
     - name: Instala los requirements usando el entorno virtual
       command: /home/admin/BackendDjango/env/bin/pip install -r /home/admin/BackendDjango/requirements.txt
