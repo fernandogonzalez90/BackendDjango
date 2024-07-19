@@ -1,0 +1,52 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Actualizar Debian
+      apt:
+        update_cache: yes
+        upgrade: yes
+      when: ansible_os_family == 'debian'
+
+    - name: Actualiza el codigo del repositorio
+      git:
+        repo: "https://github.com/fernandogonzalez90/BackendDjango.git"
+        dest: /home/admin/BackendDjango
+        update: yes
+
+
+    - name: Activa el entorno virtual
+      command: source /home/admin/BackendDjango/env/bin/activate
+      args:
+        executable: /bin/bash
+
+    - name: Instala nuevos requerimientos en el entorno virtual
+      pip:
+        requirements: /home/admin/BackendDjango/requirements.txt
+        virtualenv: /home/admin/BackendDjango/env
+
+    - name: Respaldar la base de datos
+      shell: |
+        cp /home/admin/BackendDjango/db.sqlite3 /home/admin/BackendDjango/db_backup_$(date +%Y%m%d%H%M%S).sqlite3
+      args:
+        creates: /home/admin/BackendDjango/db_backup_$(date +%Y%m%d%H%M%S).sqlite3
+      become: yes
+
+    - name: Ejecuta migrate
+      shell: |
+        . /home/admin/BackendDjango/env/bin/activate
+        python /home/admin/BackendDjango/manage.py migrate
+      args:
+        chdir: /home/admin/BackendDjango
+
+    - name: Ejecuta collecstatic
+      shell: |
+        . /home/admin/BackendDjango/env/bin/activate
+        python /home/admin/BackendDjango/manage.py collecstatic --noinput
+      args:
+        chdir: /home/admin/BackendDjango
+
+    - name: Reinicia Gunicorn
+      systemd:
+        name: gunicorn
+        state: restarted
+      become: yes
