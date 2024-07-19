@@ -5,7 +5,7 @@
       apt:
         update_cache: yes
         upgrade: yes
-      when: ansible_os_family == 'debian'
+      when: ansible_os_family == 'Debian'
 
     - name: Actualiza el codigo del repositorio
       git:
@@ -14,34 +14,25 @@
         update: yes
 
     - name: Instala los requirements usando el entorno virtual
-      shell: |
-        bash -c source /home/admin/BackendDjango/env/bin/activate
-        pip install -r /home/admin/BackendDjango/requirements.txt
+      command: /home/admin/BackendDjango/env/bin/pip install -r /home/admin/BackendDjango/requirements.txt
       args:
         chdir: /home/admin/BackendDjango
 
-
     - name: Respaldar la base de datos
-      shell: |
-        cp /home/admin/BackendDjango/db.sqlite3 /home/admin/BackendDjango/db_backup_$(date +%Y%m%d%H%M%S).sqlite3
+      command: cp /home/admin/BackendDjango/db.sqlite3 /home/admin/BackendDjango/db_backup_$(date +%Y%m%d%H%M%S).sqlite3
       args:
         creates: /home/admin/BackendDjango/db_backup_$(date +%Y%m%d%H%M%S).sqlite3
       become: yes
 
     - name: Ejecuta collectstatic
-      shell: |
-        bash -c source /home/admin/BackendDjango/env/bin/activate
-        python /home/admin/BackendDjango/manage.py collectstatic --noinput
+      command: /home/admin/BackendDjango/env/bin/python /home/admin/BackendDjango/manage.py collectstatic --noinput
       args:
         chdir: /home/admin/BackendDjango
 
     - name: Ejecuta migrate
-      shell: |
-        bash -c source /home/admin/BackendDjango/env/bin/activate
-        python /home/admin/BackendDjango/manage.py migrate
+      command: /home/admin/BackendDjango/env/bin/python /home/admin/BackendDjango/manage.py migrate
       args:
         chdir: /home/admin/BackendDjango
-
 
     - name: Reinicia Gunicorn
       systemd:
