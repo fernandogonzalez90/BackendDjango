@@ -19,7 +19,7 @@
         chdir: /home/admin/BackendDjango
 
     - name: Respaldar la base de datos
-      command: cp /home/admin/BackendDjango/db.sqlite3 /home/admin/BackendDjango/db_backup_$(date +%Y%m%d%H%M%S).sqlite3
+      shell: cp /home/admin/BackendDjango/db.sqlite3 /home/admin/BackendDjango/db_backup_$(date +%Y%m%d%H%M%S).sqlite3
       args:
         creates: /home/admin/BackendDjango/db_backup_$(date +%Y%m%d%H%M%S).sqlite3
       become: yes
