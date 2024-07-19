@@ -41,7 +41,7 @@
     - name: Configura la ip en allowed_hosts.py
       copy:
        dest: /home/admin/BackendDjango/Backend/allowed_hosts.py
-       content: "ALLOWED_HOSTS = ['{{server_ip}}']"
+       content: "ALLOWED_HOSTS = ['{{server_ip}}', 'localhost', 'backendjango.ddns.net']"
 
     - name: Establecer permisos del directorio del proyecto
       ansible.builtin.file:
@@ -131,7 +131,7 @@
               server_name backendjango.ddns.net;
 
               location / {
-                  proxy_pass backendjango.ddns.net;
+                  proxy_pass http://localhost:8000;
                   proxy_set_header Host $host;
                   proxy_set_header X-Real-IP $remote_addr;
                   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

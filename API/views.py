@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
+
+from .TelegramBot import send_telegram_message
 from .models import *
 from .serializers import *
 from .permissions import IsAuthenticatedOrReadOnly  # Importe la nueva clase de permiso
@@ -72,6 +74,11 @@ class SoftSkillsDetail(generics.RetrieveUpdateDestroyAPIView):
 class ContactoCreate(generics.ListCreateAPIView):
     queryset = Contacto.objects.all()
     serializer_class = ContactoSerializer
+
+    def perform_create(self, serializer):
+        contact = serializer.save()
+        message = f'Nuevo mensaje de contacto:\nNombre: {contact.nombre}\nEmail:{contact.email}\nAsunto: {contact.asunto}\nAsunto:{contact.asunto}'
+        send_telegram_message(message)
 
 class ContactoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Contacto.objects.all()

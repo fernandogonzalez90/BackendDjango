@@ -1,6 +1,9 @@
 # Entorno virtual
 env
 
+#Pycharm
+.idea
+
 # Archivos Multimedia
 media/*
 
