@@ -7,7 +7,17 @@
         upgrade: yes
       when: ansible_os_family == 'Debian'
 
-    - name: Actualiza el codigo del repositorio
+    - name: Descartar cambios locales
+      command: git reset --hard
+      args:
+        chdir: /home/admin/BackendDjango
+
+    - name: Limpiar archivos no rastreados
+      command: git clean -fd
+      args:
+        chdir: /home/admin/BackendDjango
+
+    - name: Actualiza el código del repositorio
       command: git pull origin main
       args:
         chdir: /home/admin/BackendDjango
