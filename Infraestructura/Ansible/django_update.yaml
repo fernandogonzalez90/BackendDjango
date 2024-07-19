@@ -8,10 +8,9 @@
       when: ansible_os_family == 'Debian'
 
     - name: Actualiza el codigo del repositorio
-      git:
-        repo: "https://github.com/fernandogonzalez90/BackendDjango.git"
-        dest: /home/admin/BackendDjango
-        update: yes
+      command: git pull origin main
+      args:
+        chdir: /home/admin/BackendDjango
 
     - name: Instala los requirements usando el entorno virtual
       command: /home/admin/BackendDjango/env/bin/pip install -r /home/admin/BackendDjango/requirements.txt
