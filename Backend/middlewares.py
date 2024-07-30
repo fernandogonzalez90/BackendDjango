@@ -1,6 +1,7 @@
 from django.core.exceptions import DisallowedHost
 import logging
 
+from API import TelegramBot
 from API.models import LogEntry
 
 logger = logging.getLogger(__name__)
@@ -19,6 +20,8 @@ class BlockDisallowedHostMiddleware:
                 message=f'Disallowed host: {request.get_host()}',
                 source='BlockDisallowedHostMiddleware'
             )
+            message = f'Warning\nDisallowed host:{request.get_host()}\nBlockDisallowedHostMiddleware'
+            TelegramBot(message)
             logger.warning(f'Disable host:  {request.get_host()}')
             raise
         return response
