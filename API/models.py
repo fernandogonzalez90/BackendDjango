@@ -39,7 +39,8 @@ class Proyectos(models.Model):
 
     def __str__(self) -> str:
         return self.titulo
-    
+
+
 class Skills(models.Model):
     titulo = models.CharField(max_length=50)
     icon = models.CharField(max_length=20)
@@ -48,13 +49,14 @@ class Skills(models.Model):
     def __str__(self) -> str:
         return self.titulo
 
+
 class SoftSkills(models.Model):
     titulo = models.CharField(max_length=50)
     color = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self) -> str:
         return self.titulo
-    
+
 
 class Contacto(models.Model):
     nombre = models.CharField(max_length=50)
@@ -65,3 +67,16 @@ class Contacto(models.Model):
 
     def __str__(self) -> str:
         return self.asunto
+
+
+class LogEntry(models.Model):
+    timestamp = models.DateTimeField(auto_created=True)
+    level = models.CharField(max_length=10)
+    message = models.TextField()
+    source = models.CharField(max_length=255)
+
+    class Meta:
+        ordering = ['-timestamp']
+
+    def __str__(self) -> str:
+        return f'{self.timestamp} - {self.level} - {self.source}'
