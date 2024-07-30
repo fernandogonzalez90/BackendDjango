@@ -33,7 +33,7 @@ def chat_id():
 def send_telegram_message(message):
     chat_id_value = chat_id()
     bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
-
+    print(f"Bot token: {bot_token}")
     url = f'https://api.telegram.org/bot{bot_token}/sendMessage'
     payload = {'chat_id': chat_id_value, 'text': message}
     response = requests.post(url, data=payload)
@@ -41,4 +41,4 @@ def send_telegram_message(message):
     print(f'id: {chat_id_value}, mensaje: {message}')
 
 
-send_telegram_message('saludos!')
+send_telegram_message('Mensaje de Prueba')
