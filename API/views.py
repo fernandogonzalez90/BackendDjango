@@ -93,10 +93,12 @@ class ContactoCreate(generics.ListCreateAPIView):
     queryset = Contacto.objects.all()
     serializer_class = ContactoSerializer
 
-    def perform_create(self, serializer):
-        contact = serializer.save()
-        message = f'Nuevo mensaje de contacto:\nNombre: {contact.nombre}\nEmail: {contact.email}\nAsunto: {contact.asunto}\nMensaje: {contact.mensaje}'
-        TelegramBot(message)
+#    def perform_create(self, serializer):
+       # contact = serializer.save()
+       # message = f'Nuevo mensaje de contacto:\nNombre: {contact.nombre}\nEmail: {contact.email}\nAsunto: {contact.asunto}\nMensaje: {contact.mensaje}'
+
+       # bot = TelegramBot()
+        #bot.send_message(message)
 
 
 class ContactoDetail(generics.RetrieveUpdateDestroyAPIView):

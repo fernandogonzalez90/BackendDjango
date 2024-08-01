@@ -14,7 +14,7 @@ from datetime import timedelta
 import os
 from pathlib import Path
 from .allowed_hosts import *
-from middlewares import BlockDisallowedHostMiddleware
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'BlockDisallowedHostMiddleware',
+    'Backend.middlewares.BlockDisallowedHostMiddleware',
 ]
 
 LOGGING = {
@@ -68,7 +68,7 @@ LOGGING = {
         'file': {
             'level': 'WARNING',
             'class': 'logging.FileHandler',
-            'filename': '~/BackendDjango/logfile.log',
+            'filename': '/home/admin/BackendDjango/logfile.log',
         },
     },
     'loggers': {
@@ -89,7 +89,7 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=365),
 }
 
 CSRF_TRUSTED_ORIGINS = [
@@ -122,6 +122,35 @@ TEMPLATES = [
         },
     },
 ]
+
+JAZZMIN_SETTINGS = {
+    'site_title': 'Portafolio Admin',
+    'site_header': 'Administración de Tu Portafolio',
+    'site_brand': 'Portafolio',
+    'welcome_sign': 'Bienvenido al Administrador',
+    'icons': {
+        'API.General': 'fas fa-house-user',
+        'API.Certificaciones': 'fas fa-graduation-cap',
+        'API.Proyectos': 'fas fa-folder',
+        'API.Skills': 'fas fa-brain',
+        'API.SoftSkills': 'fas fa-seedling',
+        'API.Contacto': 'fas fa-envelope',
+        'API.LogEntry': 'fas fa-radiation',
+        'auth.Group': 'fas fa-users',
+        'auth.User': 'fas fa-user',
+    },
+    'order_with_respect_to': [
+        'API.General',
+        'API.Certificaciones',
+        'API.Proyectos',
+        'API.Skills',
+        'API.SoftSkills',
+        'API.Contacto',
+        'API.LogEntry',
+        'auth.Group',
+        'auth.User'
+    ],
+}
 
 WSGI_APPLICATION = 'Backend.wsgi.application'
 

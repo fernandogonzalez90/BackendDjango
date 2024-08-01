@@ -1,0 +1,673 @@
+Not Found: /api
+Internal Server Error: /admin/API/logentry/
+Traceback (most recent call last):
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: API_logentry
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 716, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 240, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1985, in changelist_view
+    cl = self.get_changelist_instance(request)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/contrib/admin/options.py", line 864, in get_changelist_instance
+    return ChangeList(
+           ^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/contrib/admin/views/main.py", line 145, in __init__
+    self.get_results(request)
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/contrib/admin/views/main.py", line 312, in get_results
+    result_count = paginator.count
+                   ^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/paginator.py", line 110, in count
+    return c()
+           ^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/db/models/query.py", line 620, in count
+    return self.query.get_count(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/db/models/sql/query.py", line 629, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/db/models/sql/query.py", line 615, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: API_logentry
+Unauthorized: /api/proyectos/
+Unauthorized: /api/certificaciones/
+Unauthorized: /api/general/
+Unauthorized: /api/skills/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Internal Server Error: /api/contacto/
+Traceback (most recent call last):
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/generics.py", line 246, in post
+    return self.create(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "/home/admin/BackendDjango/API/views.py", line 99, in perform_create
+    TelegramBot(message)
+TypeError: TelegramBot.__init__() takes 1 positional argument but 2 were given
+Internal Server Error: /api/contacto/
+Traceback (most recent call last):
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/generics.py", line 246, in post
+    return self.create(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "/home/admin/BackendDjango/API/views.py", line 99, in perform_create
+    TelegramBot(message)
+TypeError: TelegramBot.__init__() takes 1 positional argument but 2 were given
+Internal Server Error: /api/contacto/
+Traceback (most recent call last):
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/generics.py", line 246, in post
+    return self.create(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "/home/admin/BackendDjango/API/views.py", line 99, in perform_create
+    TelegramBot(message)
+TypeError: TelegramBot.__init__() takes 1 positional argument but 2 were given
+Unauthorized: /api/general/
+Unauthorized: /api/skills/
+Unauthorized: /api/certificaciones/
+Unauthorized: /api/proyectos/
+Unauthorized: /api/softskills/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Unauthorized: /api/token/refresh/
+Internal Server Error: /api/contacto/
+Traceback (most recent call last):
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/generics.py", line 246, in post
+    return self.create(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "/home/admin/BackendDjango/API/views.py", line 101, in perform_create
+    bot.send_message(message)
+  File "/home/admin/BackendDjango/API/TelegramBot.py", line 35, in send_message
+    chat_id = self.chat_id()
+              ^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/API/TelegramBot.py", line 31, in chat_id
+    self.obtener_id()
+  File "/home/admin/BackendDjango/API/TelegramBot.py", line 18, in obtener_id
+    if not data['result']:
+           ~~~~^^^^^^^^^^
+KeyError: 'result'
+Internal Server Error: /api/contacto/
+Traceback (most recent call last):
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/generics.py", line 246, in post
+    return self.create(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "/home/admin/BackendDjango/API/views.py", line 101, in perform_create
+    bot.send_message(message)
+  File "/home/admin/BackendDjango/API/TelegramBot.py", line 39, in send_message
+    response.raise_for_status()
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/requests/models.py", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.telegram.org/botNone/sendMessage
+Internal Server Error: /api/contacto/
+Traceback (most recent call last):
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/generics.py", line 246, in post
+    return self.create(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "/home/admin/BackendDjango/API/views.py", line 101, in perform_create
+    bot.send_message(message)
+  File "/home/admin/BackendDjango/API/TelegramBot.py", line 39, in send_message
+    response.raise_for_status()
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/requests/models.py", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.telegram.org/botNone/sendMessage
+Not Found: /owa/auth/x.js
+Unauthorized: /api/general/
+Unauthorized: /api/certificaciones/
+Unauthorized: /api/skills/
+Unauthorized: /api/proyectos/
+Unauthorized: /api/softskills/
+Not Found: /
+Not Found: /
+Not Found: /.env
+Not Found: /
+Not Found: /
+Not Found: /+CSCOE+/logon.html
+Not Found: /
+Not Found: /favicon.ico
+Not Found: /robots.txt
+Not Found: /sitemap.xml
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /dns-query
+Not Found: /dns-query
+Not Found: /dns-query
+Not Found: /dns-query
+Not Found: /dns-query
+Not Found: /dns-query
+Not Found: /query
+Not Found: /query
+Not Found: /query
+Not Found: /query
+Not Found: /query
+Not Found: /query
+Not Found: /resolve
+Not Found: /resolve
+Not Found: /resolve
+Not Found: /resolve
+Not Found: /resolve
+Not Found: /resolve
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /ab2g
+Not Found: /ab2h
+Not Found: /alive.php
+Not Found: /
+Not Found: /t4
+Not Found: /favicon.ico
+Not Found: /
+Not Found: /teorema505
+Not Found: /
+Not Found: /.env
+Not Found: /
+Not Found: /_profiler/phpinfo
+Not Found: /.env
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /favicon.ico
+Not Found: /.env
+Not Found: /
+Not Found: /
+Not Found: /webui/
+Not Found: /favicon.ico
+Not Found: /
+Not Found: /geoserver/web/
+Not Found: /.git/config
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Unauthorized: /api/proyectos/
+Unauthorized: /api/general/
+Unauthorized: /api/certificaciones/
+Unauthorized: /api/softskills/
+Unauthorized: /api/skills/
+Not Found: /favicon.ico
+Not Found: /.env
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /_profiler/phpinfo
+Not Found: /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /vendor/phpunit/phpunit/Util/PHP/eval-stdin.php
+Not Found: /vendor/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /vendor/phpunit/Util/PHP/eval-stdin.php
+Not Found: /vendor/phpunit/phpunit/LICENSE/eval-stdin.php
+Not Found: /vendor/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /phpunit/phpunit/Util/PHP/eval-stdin.php
+Not Found: /phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /phpunit/Util/PHP/eval-stdin.php
+Not Found: /lib/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /lib/phpunit/phpunit/Util/PHP/eval-stdin.php
+Not Found: /lib/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /lib/phpunit/Util/PHP/eval-stdin.php
+Not Found: /lib/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /laravel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /www/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /ws/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /yii/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /zend/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /ws/ec/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /V2/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /tests/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /test/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /testing/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /demo/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /cms/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /crm/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /backup/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /blog/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /workspace/drupal/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /panel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /public/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /apps/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /app/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /index.php
+Not Found: /public/index.php
+Not Found: /index.php
+Not Found: /index.php
+Not Found: /ecp/Current/exporttool/microsoft.exchange.ediscovery.exporttool.application
+Invalid HTTP_HOST header: '207.154.205.99'. You may need to add '207.154.205.99' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/admin/BackendDjango/env/lib/python3.11/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '207.154.205.99'. You may need to add '207.154.205.99' to ALLOWED_HOSTS.
+Bad Request: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /.env
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Unauthorized: /api/softskills/
+Unauthorized: /api/general/
+Unauthorized: /api/skills/
+Unauthorized: /api/certificaciones/
+Unauthorized: /api/proyectos/
+Unauthorized: /api/general/
+Unauthorized: /api/skills/
+Unauthorized: /api/certificaciones/
+Unauthorized: /api/proyectos/
+Unauthorized: /api/softskills/
+Not Found: /
+Not Found: /version
+Not Found: /
+Not Found: /.env
+Not Found: /staging/.env
+Not Found: /backend/.env
+Not Found: /app/.env
+Not Found: /api/.env
+Not Found: /app_dev.php/_profiler/phpinfo
+Not Found: /.git/config
+Not Found: /.env
+Not Found: /
+Not Found: /ab2g
+Not Found: /ab2h
+Not Found: /alive.php
+Not Found: /
+Not Found: /t4
+Not Found: /favicon.ico
+Not Found: /
+Not Found: /teorema505
+Not Found: /geoserver/web
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /owa/auth/logon.aspx
+Not Found: /.env
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /webui/
+Not Found: /favicon.ico
+Not Found: /
+Not Found: /geoserver/web/
+Not Found: /.git/config
+Not Found: /epa/scripts/win/nsepa_setup.exe
+Not Found: /
+Not Found: /
+Not Found: /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /vendor/phpunit/phpunit/Util/PHP/eval-stdin.php
+Not Found: /vendor/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /vendor/phpunit/Util/PHP/eval-stdin.php
+Not Found: /vendor/phpunit/phpunit/LICENSE/eval-stdin.php
+Not Found: /vendor/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /phpunit/phpunit/Util/PHP/eval-stdin.php
+Not Found: /phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /phpunit/Util/PHP/eval-stdin.php
+Not Found: /lib/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /lib/phpunit/phpunit/Util/PHP/eval-stdin.php
+Not Found: /lib/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /lib/phpunit/Util/PHP/eval-stdin.php
+Not Found: /lib/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /laravel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /www/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /ws/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /yii/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /zend/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /ws/ec/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /V2/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /tests/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /test/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /testing/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /demo/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /cms/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /crm/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /backup/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /blog/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /workspace/drupal/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /panel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /public/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /apps/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /app/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+Not Found: /index.php
+Not Found: /public/index.php
+Not Found: /index.php
+Not Found: /index.php
+Not Found: /
+Not Found: /autodiscover/autodiscover.json
+Not Found: /.env
+Not Found: /
+Not Found: /
+Not Found: /.env
+Not Found: /
+Not Found: /
+Not Found: /.env
+Not Found: /
+Not Found: /
+Not Found: /favicon.ico
+Unauthorized: /api/certificaciones/
+Unauthorized: /api/proyectos/
+Unauthorized: /api/softskills/
+Unauthorized: /api/general/
+Unauthorized: /api/skills/
+Not Found: /.env
+Not Found: /
+Not Found: /favicon.ico
+Unauthorized: /api/general/
+Unauthorized: /api/certificaciones/
+Unauthorized: /api/proyectos/
+Unauthorized: /api/skills/
+Unauthorized: /api/softskills/
+Not Found: /
+Unauthorized: /api/certificaciones/
+Unauthorized: /api/proyectos/
+Unauthorized: /api/skills/
+Unauthorized: /api/general/
+Unauthorized: /api/softskills/
+Not Found: /api
+Not Found: /api/
+Not Found: /.env
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /

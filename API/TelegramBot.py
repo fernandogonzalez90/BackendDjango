@@ -2,10 +2,12 @@ import requests
 import os
 
 
+print(os.getenv('TELEGRAM_BOT_TOKEN'))
+
 class TelegramBot:
     def __init__(self):
         self.bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
-        self.ruta_archivo = './chat_id.txt'
+        self.ruta_archivo = '/home/admin/BackendDjango/chat_id.txt'
 
     def obtener_id(self):
         response = requests.get(
@@ -24,6 +26,7 @@ class TelegramBot:
     def chat_id(self):
         if os.path.exists(self.ruta_archivo):
             with open(self.ruta_archivo, 'r') as file:
+                print(f'Ruta: {self.ruta_archivo}\nID: {file.read().strip()}')
                 return file.read().strip()
         else:
             self.obtener_id()
