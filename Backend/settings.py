@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
-from .allowed_hosts import ALLOWED_HOSTS
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,8 +27,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-b)vt_*ed6vuy4bzpue0_#u@8su*_x6&u20qsrxbg#y!rrp9psc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# ALLOWED_HOSTS = ['backendjango.ddns.net']
+DEBUG = False
+ALLOWED_HOSTS = ['devgonzalezf.com.ar']
 
 
 # Application definition
