@@ -10,11 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-from datetime import timedelta
-import os
-from pathlib import Path
-from .allowed_hosts import *
 
+import os
+from datetime import timedelta
+from pathlib import Path
+from .allowed_hosts import ALLOWED_HOSTS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -66,15 +66,15 @@ LOGGING = {
     'disable_existing_loggers': False,
     'handlers': {
         'file': {
-            'level': 'WARNING',
+            'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': '/home/admin/BackendDjango/logfile.log',
+            'filename': BASE_DIR / 'errors.log',
         },
     },
     'loggers': {
         'django': {
             'handlers': ['file'],
-            'level': 'WARNING',
+            'level': 'ERROR',
             'propagate': True,
         },
     },
@@ -93,7 +93,6 @@ SIMPLE_JWT = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://backendjango.ddns.net",
     "https://devgonzalezf.netlify.app",
 ]
 
