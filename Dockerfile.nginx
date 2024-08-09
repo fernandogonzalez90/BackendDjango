@@ -1,0 +1,18 @@
+# Usa una imagen base de Nginx
+FROM nginx:latest
+
+# Instala Certbot y el plugin de Nginx para Certbot
+RUN apt-get update && \
+    apt-get install -y certbot python3-certbot-nginx
+
+# Copia tu archivo de configuración de Nginx a la imagen
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Crea un directorio para los desafíos de Certbot
+RUN mkdir -p /var/www/certbot
+
+# Expone los puertos necesarios
+EXPOSE 80 443
+
+# Comando por defecto para iniciar Nginx
+CMD ["nginx", "-g", "daemon off;"]
