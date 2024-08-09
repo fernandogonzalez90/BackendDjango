@@ -4,7 +4,7 @@ services:
   django:
     build:
       context: .
-      dockerfile: Docker.django
+      dockerfile: Dockerfile.django
     container_name: devgonzalezf_django
     ports:
       - "8000:8000"
@@ -14,7 +14,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: Docker.nginx
+      dockerfile: Dockerfile.nginx
     container_name: devgonzalezf_nginx
     volumes:
       - ./certs:/etc/letsencrypt
